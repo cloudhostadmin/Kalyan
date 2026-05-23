@@ -41,11 +41,13 @@ body::before {
     url("data:image/svg+xml,%3Csvg width='44' height='44' viewBox='0 0 44 44' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M22 4l2 9-9-2 7 7-7 7 9-2-2 9 2-9 9 2-7-7 7-7-9 2z' fill='%23c8920a' fill-opacity='0.035'/%3E%3C/svg%3E");
 }
 .page { position:relative; z-index:1; width:100%; max-width:580px; }
+
 /* Card */
 .card {
   background:#fff; border-radius:var(--radius);
   box-shadow:var(--shadow); border:1.5px solid var(--gold-border); overflow:hidden;
 }
+
 /* Header */
 .card-header {
   background:linear-gradient(135deg,#6b3c00 0%,#c8920a 55%,#e8b830 100%);
@@ -70,8 +72,10 @@ body::before {
 .header-text .note {
   font-size:11px; color:rgba(255,255,255,.58); margin-top:3px; font-style:italic;
 }
+
 /* Body */
 .card-body { padding:26px 30px 32px; }
+
 /* Customer ID banner — sits between header and card body */
 .cid-banner {
   display: none;
@@ -112,8 +116,10 @@ body::before {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 /* Keep old cid-wrap hidden — no longer used */
 .cid-wrap { display: none !important; }
+
 /* Status / error */
 #fetchStatus { font-size:12px; color:var(--muted); text-align:right; min-height:16px; margin-bottom:4px; }
 #fetchError {
@@ -122,14 +128,17 @@ body::before {
   margin-bottom:18px; font-size:13px; font-weight:500;
 }
 #fetchError.active { display:block; }
+
 /* Already submitted */
 .done-screen { display:none; text-align:center; padding:36px 20px; }
 .done-screen .big { font-size:50px; margin-bottom:14px; }
 .done-screen h2 { font-family:'DM Serif Display',serif; font-size:22px; color:var(--green); margin-bottom:10px; }
 .done-screen p  { color:var(--muted); font-size:14px; line-height:1.6; }
+
 /* Section heading */
 .sec-title { font-family:'DM Serif Display',serif; font-size:18px; color:var(--text); margin-bottom:4px; }
 .sec-desc  { font-size:13px; color:var(--muted); margin-bottom:16px; line-height:1.5; }
+
 /* Radio cards */
 .radio-group { display:flex; flex-direction:column; gap:9px; margin-bottom:6px; }
 .radio-card {
@@ -160,12 +169,14 @@ body::before {
 .radio-card.selected .radio-dot::after { opacity:1; transform:scale(1); }
 .radio-hi { font-family:'Tiro Devanagari Hindi',serif; font-size:15px; color:var(--text); line-height:1.4; }
 .field-error { color:var(--red); font-size:12.5px; margin:8px 0 14px; display:none; }
+
 /* Divider */
 .divider {
   display:flex; align-items:center; gap:10px;
   margin:22px 0 18px; color:#c8b880; font-size:12px;
 }
 .divider::before,.divider::after { content:''; flex:1; height:1px; background:#e8dfc8; }
+
 /* Action buttons */
 .action-row { display:grid; grid-template-columns:1fr 1fr; gap:13px; }
 .act-btn {
@@ -190,6 +201,7 @@ body::before {
 .btn-addr:hover { border-color:var(--gold); background:var(--gold-bg); transform:translateY(-2px); box-shadow:0 5px 18px rgba(200,146,10,.1); }
 .btn-addr.open  { border-color:var(--gold); background:var(--gold-bg); box-shadow:0 3px 12px rgba(200,146,10,.15); }
 .btn-addr:active { transform:translateY(0); }
+
 /* Address saved notice */
 .addr-saved {
   display:none; margin-top:14px;
@@ -198,6 +210,7 @@ body::before {
   font-size:13px; font-weight:600; align-items:center; gap:8px;
 }
 .addr-saved.show { display:flex; }
+
 /* Address panel */
 .addr-panel {
   max-height:0; overflow:hidden;
@@ -214,6 +227,7 @@ body::before {
   padding:9px 13px; border-radius:0 8px 8px 0;
   font-size:12.5px; color:var(--gold-dark); font-weight:500; margin-bottom:18px;
 }
+
 /* Form fields */
 .fg { margin-bottom:16px; }
 .fg label { display:block; margin-bottom:6px; color:#333; font-weight:600; font-size:13px; }
@@ -239,6 +253,7 @@ body::before {
 .pin-status.loading { color:var(--gold-dark); background:var(--gold-bg); border:1px solid var(--gold-border); }
 .pin-status.success { color:var(--green); background:#e8f5ed; }
 .pin-status.error   { color:var(--red);   background:#fdf0ee; }
+
 /* Save Changes button */
 .save-btn {
   width:100%; padding:13px;
@@ -249,6 +264,7 @@ body::before {
 }
 .save-btn:hover:not(:disabled) { transform:translateY(-2px); box-shadow:0 7px 22px rgba(26,122,60,.32); }
 .save-btn:disabled { opacity:.55; cursor:not-allowed; }
+
 /* Shimmer */
 @keyframes shimmer {
   0%   { background-position:-600px 0; }
@@ -265,6 +281,7 @@ body::before {
 }
 .skeleton .fg input:disabled { animation:none; background:#f0ebe0 !important; }
 .hidden { display:none !important; }
+
 @media(max-width:480px){
   .card-header { padding:18px; gap:13px; }
   .cid-banner { padding:9px 18px; }
@@ -280,6 +297,7 @@ body::before {
 <body>
 <div class="page">
 <div class="card">
+
   <!-- Header -->
   <div class="card-header">
     <img src="https://raw.githubusercontent.com/cloudhostadmin/KALYAN_CENTURY_2026/main/kal2026.jpeg"
@@ -290,30 +308,39 @@ body::before {
       <div class="note">Only for Existing Subscriptions Upgrade</div>
     </div>
   </div>
+
   <!-- Customer ID banner — shown right below header when customerId is in URL -->
   <div class="cid-banner" id="cidBanner">
     <span class="cid-label">Customer ID</span>
     <input type="text" class="cid-pill" id="customerIdDisplay" disabled autocomplete="off" readonly>
   </div>
+
   <div class="card-body">
+
     <!-- legacy cid-wrap kept for JS compat but hidden via CSS -->
     <div class="cid-wrap" id="cidWrap" style="display:none;"></div>
+
     <!-- Hidden fields used in payloads -->
     <input type="hidden" id="customerId">
     <input type="hidden" id="paymentLink" value="https://p.ppsl.io/PYTMPS/f4FEqk">
+
     <div id="fetchError"></div>
     <div id="fetchStatus"></div>
+
     <!-- Already submitted -->
     <div class="done-screen" id="alreadySubmitted">
       <div class="big">✅</div>
       <h2>Already Submitted</h2>
       <p>This form has already been submitted.<br>Thank you for your response!</p>
     </div>
+
     <!-- Main content -->
     <div id="mainContent">
+
       <!-- Feedback -->
       <div class="sec-title">आपका अनुभव बताएं</div>
       <div class="sec-desc">कृपया नीचे दिए विकल्पों में से अपनी स्थिति चुनें</div>
+
       <div class="radio-group" id="feedbackGroup">
         <label class="radio-card" onclick="pickRadio(this)">
           <input type="radio" name="feedback" value="2026 के ज्यादातर अंक प्राप्त नहीं हो सका">
@@ -332,6 +359,7 @@ body::before {
         </label>
       </div>
       <div class="field-error" id="feedbackErr">⚠️ कृपया एक विकल्प चुनें</div>
+
       <!-- Action buttons -->
       <div class="divider">अपना विकल्प चुनें — Choose your action</div>
       <div class="action-row">
@@ -346,10 +374,12 @@ body::before {
           <span class="dsc">पता बदलें फिर<br>Pay Now करें</span>
         </button>
       </div>
+
       <!-- Address saved notice (shows after Save Changes) -->
       <div class="addr-saved" id="addrSaved">
         ✅ नया पता सहेजा गया — New address saved. Now click Pay Now.
       </div>
+
       <!-- Address form panel -->
       <div class="addr-panel" id="addrPanel">
         <div class="addr-inner">
@@ -412,10 +442,12 @@ body::before {
         </div>
       </div>
       <!-- /addr-panel -->
+
     </div><!-- /mainContent -->
   </div><!-- /card-body -->
 </div><!-- /card -->
 </div><!-- /page -->
+
 <script>
 // ═══════════════════════════════════════════════
 //  CONFIG
@@ -426,16 +458,19 @@ const APPS_SCRIPT_URL     = 'https://script.google.com/macros/s/AKfycbxsFNHtUwok
 const FEEDBACK_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw8OSOBu_CzJdO9VM0PLBn2Zb7XUOw6MY-GSI8y6wZbC4JqbysoiWI2IUeWp5SgDdp8Pw/exec';
 // Script 3: Save address + payment submission to Submissions sheet (POST)
 const SUBMIT_SCRIPT_URL   = 'https://script.google.com/macros/s/AKfycby-f9vRF58sNIRFIkb6KP2PV7clI2-jSo3NdDy788QIE4XH_yIXfcxnvdwQGo2q6p9N0A/exec';
+
 // ── State ─────────────────────────────────────
 let selectedFeedback = '';
 let addrOpen         = false;
 let originalData     = {};   // raw data from sheet
 let updatedAddress   = null; // set only after Save Changes — null means use original
+
 // ── Refs ──────────────────────────────────────
 const cityInput    = document.getElementById('city');
 const stateInput   = document.getElementById('state');
 const pincodeInput = document.getElementById('pincode');
 const pinStatus    = document.getElementById('pincodeStatus');
+
 // ── URL param ─────────────────────────────────
 function getParam(n) {
   const v = new URLSearchParams(window.location.search).get(n);
@@ -446,17 +481,20 @@ function getParam(n) {
   }
   return '';
 }
+
 // ── Set field ─────────────────────────────────
 function setField(id, val) {
   if (val == null || val === '') return;
   const el = document.getElementById(id);
   if (el) el.value = String(val).trim();
 }
+
 // ── Shimmer ───────────────────────────────────
 function setShimmer(on) {
   document.getElementById('mainContent').classList.toggle('skeleton', on);
   document.getElementById('fetchStatus').textContent = on ? '⏳ Loading your details…' : '';
 }
+
 // ── Radio pick ────────────────────────────────
 function pickRadio(label) {
   document.querySelectorAll('.radio-card').forEach(c => c.classList.remove('selected'));
@@ -465,6 +503,7 @@ function pickRadio(label) {
   if (inp) { inp.checked = true; selectedFeedback = inp.value; }
   document.getElementById('feedbackErr').style.display = 'none';
 }
+
 // ── Toggle address panel ──────────────────────
 function toggleAddressForm() {
   addrOpen = !addrOpen;
@@ -478,81 +517,43 @@ function toggleAddressForm() {
     }, 80);
   }
 }
+
 // ── Pincode lookup ────────────────────────────
-// api.postalpincode.in blocks browser fetch (no CORS headers).
-// We route through allorigins.win which adds CORS headers transparently.
-// Fallback: corsproxy.io does the same thing.
 async function fetchPincode(pincode, silent = false) {
   if (!/^\d{6}$/.test(pincode)) return null;
-
-  if (!silent) {
-    pinStatus.textContent = '🔍 Fetching location…';
-    pinStatus.className = 'pin-status loading';
-    pinStatus.style.display = 'block';
-  }
-
-  var TARGET = 'https://api.postalpincode.in/pincode/' + pincode;
-
-  // Parse the postalpincode.in JSON response
-  function parse(d) {
-    if (d && d[0] && d[0].Status === 'Success' &&
-        d[0].PostOffice && d[0].PostOffice.length > 0) {
-      var po = d[0].PostOffice[0];
+  try {
+    if (!silent) {
+      pinStatus.textContent = '🔍 Fetching…';
+      pinStatus.className = 'pin-status loading';
+      pinStatus.style.display = 'block';
+    }
+    const r = await fetch('https://api.postalpincode.in/pincode/' + pincode);
+    const d = await r.json();
+    if (d && d[0] && d[0].Status === 'Success' && d[0].PostOffice && d[0].PostOffice.length > 0) {
+      const po = d[0].PostOffice[0];
+      if (!silent) {
+        pinStatus.textContent = '✅ Location found!';
+        pinStatus.className = 'pin-status success';
+        setTimeout(() => { pinStatus.style.display = 'none'; }, 3000);
+      }
       return { city: po.District || po.Block || '', state: po.State || '' };
+    }
+    if (!silent) {
+      pinStatus.textContent = '❌ Invalid — enter manually';
+      pinStatus.className = 'pin-status error';
+      setTimeout(() => { pinStatus.style.display = 'none'; }, 4000);
+    }
+    return null;
+  } catch(err) {
+    if (!silent) {
+      pinStatus.textContent = '⚠️ Error — enter manually';
+      pinStatus.className = 'pin-status error';
+      setTimeout(() => { pinStatus.style.display = 'none'; }, 4000);
     }
     return null;
   }
-
-  // Timed fetch — aborts after ms milliseconds
-  function timedFetch(url, ms) {
-    var ctrl = new AbortController();
-    var t = setTimeout(function() { ctrl.abort(); }, ms || 6000);
-    return fetch(url, { signal: ctrl.signal }).then(function(r) {
-      clearTimeout(t); return r;
-    }, function(e) { clearTimeout(t); throw e; });
-  }
-
-  // ── Proxy 1: allorigins.win ──
-  try {
-    var url1 = 'https://api.allorigins.win/get?url=' + encodeURIComponent(TARGET);
-    var r1   = await timedFetch(url1, 6000);
-    var j1   = await r1.json();
-    var d1   = JSON.parse(j1.contents);
-    var loc1 = parse(d1);
-    if (loc1) {
-      if (!silent) {
-        pinStatus.textContent = '✅ Location found!';
-        pinStatus.className = 'pin-status success';
-        setTimeout(function() { pinStatus.style.display = 'none'; }, 3000);
-      }
-      return loc1;
-    }
-  } catch(e1) { /* proxy 1 failed — try next */ }
-
-  // ── Proxy 2: corsproxy.io ──
-  try {
-    var url2 = 'https://corsproxy.io/?' + encodeURIComponent(TARGET);
-    var r2   = await timedFetch(url2, 6000);
-    var d2   = await r2.json();
-    var loc2 = parse(d2);
-    if (loc2) {
-      if (!silent) {
-        pinStatus.textContent = '✅ Location found!';
-        pinStatus.className = 'pin-status success';
-        setTimeout(function() { pinStatus.style.display = 'none'; }, 3000);
-      }
-      return loc2;
-    }
-  } catch(e2) { /* proxy 2 also failed */ }
-
-  // ── Both failed ──
-  if (!silent) {
-    pinStatus.textContent = '❌ Could not fetch — enter city & state manually';
-    pinStatus.className = 'pin-status error';
-    setTimeout(function() { pinStatus.style.display = 'none'; }, 5000);
-  }
-  return null;
 }
+
 pincodeInput.addEventListener('input', async function(e) {
   var p = e.target.value.trim();
   if (p.length < 6) { pinStatus.style.display = 'none'; return; }
@@ -561,12 +562,14 @@ pincodeInput.addEventListener('input', async function(e) {
     if (loc) { cityInput.value = loc.city; stateInput.value = loc.state; }
   }
 });
+
 // ── Char counts ───────────────────────────────
 ['address1','address2','address3'].forEach(function(id, i) {
   var el = document.getElementById(id);
   var sp = document.getElementById(['a1c','a2c','a3c'][i]);
   el.addEventListener('input', function() { sp.textContent = el.value.length; });
 });
+
 // ── Populate form from sheet data ─────────────
 async function populateFromData(data) {
   originalData = data;
@@ -580,6 +583,7 @@ async function populateFromData(data) {
   setField('alternateMobile', data.alternateMobile);
   if (data.paymentLink || data.PaymentLink)
     setField('paymentLink', data.paymentLink || data.PaymentLink);
+
   var pincode = data.pincode ? String(data.pincode).trim() : '';
   if (pincode) {
     setField('pincode', pincode);
@@ -592,11 +596,13 @@ async function populateFromData(data) {
   } else {
     setField('city', data.city); setField('state', data.state);
   }
+
   ['address1','address2','address3'].forEach(function(id, i) {
     var sp = document.getElementById(['a1c','a2c','a3c'][i]);
     sp.textContent = (document.getElementById(id).value || '').length;
   });
 }
+
 // ── Validate feedback ─────────────────────────
 function requireFeedback() {
   if (!selectedFeedback) {
@@ -606,12 +612,14 @@ function requireFeedback() {
   }
   return true;
 }
+
 // ── Save Changes (address form) ───────────────
 async function saveAddress(e) {
   e.preventDefault();
   var btn = document.getElementById('saveBtn');
   btn.disabled = true;
   btn.textContent = 'Saving…';
+
   updatedAddress = {
     firstName:       document.getElementById('firstName').value,
     lastName:        document.getElementById('lastName').value,
@@ -625,7 +633,9 @@ async function saveAddress(e) {
     emailId:         document.getElementById('emailId').value,
     alternateMobile: document.getElementById('alternateMobile').value
   };
+
   var custId = document.getElementById('customerId').value;
+
   // ── Script 2: save feedback selection ──
   fetch(FEEDBACK_SCRIPT_URL, {
     method: 'POST', mode: 'no-cors',
@@ -637,6 +647,7 @@ async function saveAddress(e) {
       action:     'address_saved'
     })
   }).catch(function() {});
+
   // ── Script 3: save address update ──
   fetch(SUBMIT_SCRIPT_URL, {
     method: 'POST', mode: 'no-cors',
@@ -650,6 +661,7 @@ async function saveAddress(e) {
       timestamp:      new Date().toISOString()
     }, updatedAddress))
   }).catch(function() {});
+
   // Close panel and show confirmation
   addrOpen = false;
   document.getElementById('addrPanel').classList.remove('open');
@@ -657,24 +669,31 @@ async function saveAddress(e) {
   document.getElementById('addrToggleBtn').querySelector('.dsc').innerHTML = 'पता बदलें फिर<br>Pay Now करें';
   document.getElementById('addrToggleBtn').querySelector('.ttl').textContent = '✅ Address Saved';
   document.getElementById('addrSaved').classList.add('show');
+
   btn.disabled = false;
   btn.textContent = '💾 Save Changes';
+
   setTimeout(function() {
     document.getElementById('payNowBtn').scrollIntoView({ behavior:'smooth', block:'center' });
   }, 200);
 }
+
 // ── Pay Now ───────────────────────────────────
 async function handlePayNow() {
   if (!requireFeedback()) return;
+
   var custId  = document.getElementById('customerId').value;
   var payLink = document.getElementById('paymentLink').value;
   var key     = 'form_submitted_' + custId;
+
   if (localStorage.getItem(key) === 'true') {
     window.location.href = payLink; return;
   }
+
   var payNowBtn = document.getElementById('payNowBtn');
   payNowBtn.disabled = true;
   payNowBtn.querySelector('.ttl').textContent = 'Processing…';
+
   // Use saved address if user clicked Save Changes, else original from sheet
   var addr = updatedAddress || {
     firstName:       originalData.firstName       || '',
@@ -689,6 +708,7 @@ async function handlePayNow() {
     emailId:         originalData.email || originalData.emailId || '',
     alternateMobile: originalData.alternateMobile || ''
   };
+
   var payload = Object.assign({
     type:           updatedAddress ? 'pay_with_new_address' : 'pay_original_address',
     customerId:     custId,
@@ -697,6 +717,7 @@ async function handlePayNow() {
     paymentLink:    payLink,
     timestamp:      new Date().toISOString()
   }, addr);
+
   // ── Script 2: save feedback selection ──
   fetch(FEEDBACK_SCRIPT_URL, {
     method: 'POST', mode: 'no-cors',
@@ -708,15 +729,18 @@ async function handlePayNow() {
       action:     'pay_now'
     })
   }).catch(function() {});
+
   // ── Script 3: save full form data ──
   fetch(SUBMIT_SCRIPT_URL, {
     method: 'POST', mode: 'no-cors',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload)
   }).catch(function() {});
+
   localStorage.setItem(key, 'true');
   window.location.href = payLink;
 }
+
 // ═══════════════════════════════════════════════
 //  INIT
 // ═══════════════════════════════════════════════
@@ -725,6 +749,7 @@ async function initForm() {
   var paymentLink  = getParam('paymentLink');
   var rightLogoUrl = getParam('rightLogo');
   var logoSize     = getParam('logoSize');
+
   if (paymentLink)  setField('paymentLink', decodeURIComponent(paymentLink));
   if (rightLogoUrl) document.getElementById('rightLogo').src = decodeURIComponent(rightLogoUrl);
   if (logoSize) {
@@ -732,12 +757,16 @@ async function initForm() {
     if (s > 0 && s <= 300)
       document.documentElement.style.setProperty('--logo-size', s + 'px');
   }
+
   if (!customerId) return;
+
   var id = decodeURIComponent(customerId);
+
   // Populate hidden payload field and visible banner display
   document.getElementById('customerId').value        = id;
   document.getElementById('customerIdDisplay').value = id;
   document.getElementById('cidBanner').classList.add('visible');
+
   // Already submitted?
   var key = 'form_submitted_' + id;
   if (localStorage.getItem(key) === 'true') {
@@ -745,6 +774,7 @@ async function initForm() {
     document.getElementById('alreadySubmitted').style.display = 'block';
     return;
   }
+
   // Show shimmer while fetching from sheet
   setShimmer(true);
   try {
@@ -766,6 +796,7 @@ async function initForm() {
     setShimmer(false);
   }
 }
+
 initForm();
 </script>
 </body>
