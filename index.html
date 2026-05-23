@@ -396,11 +396,6 @@ var addrOpen            = false;
 var originalData        = {};
 var updatedAddress      = null;
 
-// ── FIX 1: Flag to block pincode API during auto-fill ──
-// When true, the pincode input listener does nothing.
-// Set true before populateFromData runs, false after it finishes.
-var populatingFromSheet = false;
-
 // ── Refs ──────────────────────────────────────
 var cityInput    = document.getElementById('city');
 var stateInput   = document.getElementById('state');
@@ -487,11 +482,8 @@ async function fetchPincode(pincode, silent) {
   }
 }
 
-// ── FIX 2: Pincode input listener ────────────
-// Only fires when user is manually typing a new pincode.
-// Blocked during auto-fill so it never interferes with sheet data.
+// Pincode input listener — fires only when user manually types
 pincodeInput.addEventListener('input', async function(e) {
-  if (populatingFromSheet) return; // blocked during auto-fill
   var p = e.target.value.trim();
   if (p.length < 6) { pinStatus.style.display = 'none'; return; }
   if (p.length === 6) {
@@ -507,12 +499,10 @@ pincodeInput.addEventListener('input', async function(e) {
 });
 
 // ── Populate from sheet data ──────────────────
-// FIX 3: city/state always taken from sheet first.
-// Pincode API only called silently when both city AND state are absent from sheet.
-async function populateFromData(data) {
+// Sheet data is the source of truth — no API calls during auto-fill.
+// Pincode API only fires when user manually types in the address form.
+function populateFromData(data) {
   originalData = data;
-  populatingFromSheet = true; // block pincode listener
-
   setField('firstName',       data.firstName);
   setField('lastName',        data.lastName);
   setField('address1',        data.address1);
@@ -524,28 +514,18 @@ async function populateFromData(data) {
   if (data.paymentLink || data.PaymentLink)
     setField('paymentLink', data.paymentLink || data.PaymentLink);
 
+  // Always set pincode, city, state directly from sheet.
+  // Never call the pincode API during auto-fill — sheet data is the source of truth.
+  // If city/state are missing from the sheet, the user will fill them manually.
   var pincode = data.pincode ? String(data.pincode).trim() : '';
-  if (pincode) setField('pincode', pincode);
-
-  var cityVal  = (data.city  || '').trim();
-  var stateVal = (data.state || '').trim();
-
-  if (cityVal || stateVal) {
-    // Sheet has city/state — use directly. No API call.
-    setField('city',  data.city);
-    setField('state', data.state);
-  } else if (pincode) {
-    // Sheet missing both — try API silently as last resort. No error shown.
-    var loc = await fetchPincode(pincode, true);
-    if (loc) { cityInput.value = loc.city; stateInput.value = loc.state; }
-  }
+  if (pincode) pincodeInput.value = pincode; // direct assignment, no input event fired
+  if ((data.city  || '').trim()) cityInput.value  = data.city.trim();
+  if ((data.state || '').trim()) stateInput.value = data.state.trim();
 
   ['address1','address2','address3'].forEach(function(id, i) {
     var sp = document.getElementById(['a1c','a2c','a3c'][i]);
     sp.textContent = (document.getElementById(id).value || '').length;
   });
-
-  populatingFromSheet = false; // re-enable pincode listener for manual edits
 }
 
 function requireFeedback() {
@@ -703,7 +683,7 @@ async function initForm() {
     var res    = await fetch(APPS_SCRIPT_URL + '?action=getCustomer&customerId=' + encodeURIComponent(id));
     var result = await res.json();
     if (result.success && result.data) {
-      await populateFromData(result.data);
+      populateFromData(result.data);
     } else {
       var errEl = document.getElementById('fetchError');
       errEl.textContent = 'Customer ID "' + id + '" not found. Please fill in your details manually.';
