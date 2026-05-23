@@ -41,14 +41,10 @@ body::before {
     url("data:image/svg+xml,%3Csvg width='44' height='44' viewBox='0 0 44 44' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M22 4l2 9-9-2 7 7-7 7 9-2-2 9 2-9 9 2-7-7 7-7-9 2z' fill='%23c8920a' fill-opacity='0.035'/%3E%3C/svg%3E");
 }
 .page { position:relative; z-index:1; width:100%; max-width:580px; }
-
-/* Card */
 .card {
   background:#fff; border-radius:var(--radius);
   box-shadow:var(--shadow); border:1.5px solid var(--gold-border); overflow:hidden;
 }
-
-/* Header */
 .card-header {
   background:linear-gradient(135deg,#6b3c00 0%,#c8920a 55%,#e8b830 100%);
   padding:26px 30px 22px; display:flex; align-items:center; gap:18px; position:relative;
@@ -72,11 +68,7 @@ body::before {
 .header-text .note {
   font-size:11px; color:rgba(255,255,255,.58); margin-top:3px; font-style:italic;
 }
-
-/* Body */
 .card-body { padding:26px 30px 32px; }
-
-/* Customer ID banner — sits between header and card body */
 .cid-banner {
   display: none;
   background: linear-gradient(90deg, #7a5500 0%, #c8920a 100%);
@@ -87,40 +79,22 @@ body::before {
 }
 .cid-banner.visible { display: flex; }
 .cid-banner .cid-label {
-  font-size: 10.5px;
-  font-weight: 700;
-  color: rgba(255,255,255,.65);
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-  white-space: nowrap;
-  flex-shrink: 0;
+  font-size: 10.5px; font-weight: 700;
+  color: rgba(255,255,255,.65); letter-spacing: 1.2px;
+  text-transform: uppercase; white-space: nowrap; flex-shrink: 0;
 }
 .cid-banner .cid-pill {
   background: rgba(255,255,255,.18);
   border: 1.5px solid rgba(255,255,255,.35);
-  border-radius: 20px;
-  padding: 4px 14px;
+  border-radius: 20px; padding: 4px 14px;
   font-family: 'Courier New', Courier, monospace;
-  font-size: 14px;
-  font-weight: 800;
-  color: #fff;
-  letter-spacing: .8px;
-  cursor: not-allowed;
-  outline: none;
-  -webkit-text-fill-color: #fff;
-  opacity: 1;
-  min-width: 0;
-  width: auto;
-  max-width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font-size: 14px; font-weight: 800; color: #fff;
+  letter-spacing: .8px; cursor: not-allowed; outline: none;
+  -webkit-text-fill-color: #fff; opacity: 1;
+  min-width: 0; width: auto; max-width: 100%;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
-
-/* Keep old cid-wrap hidden — no longer used */
 .cid-wrap { display: none !important; }
-
-/* Status / error */
 #fetchStatus { font-size:12px; color:var(--muted); text-align:right; min-height:16px; margin-bottom:4px; }
 #fetchError {
   display:none; background:#fff8e6; border:1.5px solid #f0c040;
@@ -128,25 +102,17 @@ body::before {
   margin-bottom:18px; font-size:13px; font-weight:500;
 }
 #fetchError.active { display:block; }
-
-/* Already submitted */
 .done-screen { display:none; text-align:center; padding:36px 20px; }
 .done-screen .big { font-size:50px; margin-bottom:14px; }
 .done-screen h2 { font-family:'DM Serif Display',serif; font-size:22px; color:var(--green); margin-bottom:10px; }
 .done-screen p  { color:var(--muted); font-size:14px; line-height:1.6; }
-
-/* Section heading */
 .sec-title { font-family:'DM Serif Display',serif; font-size:18px; color:var(--text); margin-bottom:4px; }
 .sec-desc  { font-size:13px; color:var(--muted); margin-bottom:16px; line-height:1.5; }
-
-/* Radio cards */
 .radio-group { display:flex; flex-direction:column; gap:9px; margin-bottom:6px; }
 .radio-card {
   display:flex; align-items:center; gap:13px;
-  padding:13px 15px; border:2px solid #ebe3cc;
-  border-radius:10px; cursor:pointer;
-  transition:border-color .2s, background .2s, box-shadow .2s;
-  user-select:none;
+  padding:13px 15px; border:2px solid #ebe3cc; border-radius:10px;
+  cursor:pointer; transition:border-color .2s, background .2s, box-shadow .2s; user-select:none;
 }
 .radio-card:hover { border-color:var(--gold-light); background:var(--gold-bg); }
 .radio-card.selected {
@@ -158,8 +124,7 @@ body::before {
 .radio-dot {
   width:20px; height:20px; border-radius:50%;
   border:2px solid #c8b070; flex-shrink:0;
-  display:flex; align-items:center; justify-content:center;
-  transition:all .2s;
+  display:flex; align-items:center; justify-content:center; transition:all .2s;
 }
 .radio-card.selected .radio-dot { border-color:var(--gold); background:var(--gold); }
 .radio-dot::after {
@@ -169,15 +134,11 @@ body::before {
 .radio-card.selected .radio-dot::after { opacity:1; transform:scale(1); }
 .radio-hi { font-family:'Tiro Devanagari Hindi',serif; font-size:15px; color:var(--text); line-height:1.4; }
 .field-error { color:var(--red); font-size:12.5px; margin:8px 0 14px; display:none; }
-
-/* Divider */
 .divider {
   display:flex; align-items:center; gap:10px;
   margin:22px 0 18px; color:#c8b880; font-size:12px;
 }
 .divider::before,.divider::after { content:''; flex:1; height:1px; background:#e8dfc8; }
-
-/* Action buttons */
 .action-row { display:grid; grid-template-columns:1fr 1fr; gap:13px; }
 .act-btn {
   padding:18px 12px; border-radius:12px; border:2px solid transparent;
@@ -195,14 +156,10 @@ body::before {
 .btn-pay:hover { transform:translateY(-2px); box-shadow:0 8px 26px rgba(200,146,10,.42); }
 .btn-pay:active { transform:translateY(0); }
 .btn-pay:disabled { opacity:.5; cursor:not-allowed; transform:none; }
-.btn-addr {
-  background:#fff; color:var(--gold-dark); border-color:var(--gold-border);
-}
+.btn-addr { background:#fff; color:var(--gold-dark); border-color:var(--gold-border); }
 .btn-addr:hover { border-color:var(--gold); background:var(--gold-bg); transform:translateY(-2px); box-shadow:0 5px 18px rgba(200,146,10,.1); }
 .btn-addr.open  { border-color:var(--gold); background:var(--gold-bg); box-shadow:0 3px 12px rgba(200,146,10,.15); }
 .btn-addr:active { transform:translateY(0); }
-
-/* Address saved notice */
 .addr-saved {
   display:none; margin-top:14px;
   background:#e8f5ed; border:1.5px solid #48bb78;
@@ -210,12 +167,9 @@ body::before {
   font-size:13px; font-weight:600; align-items:center; gap:8px;
 }
 .addr-saved.show { display:flex; }
-
-/* Address panel */
 .addr-panel {
   max-height:0; overflow:hidden;
-  transition:max-height .45s cubic-bezier(.4,0,.2,1), opacity .35s;
-  opacity:0;
+  transition:max-height .45s cubic-bezier(.4,0,.2,1), opacity .35s; opacity:0;
 }
 .addr-panel.open { max-height:2400px; opacity:1; }
 .addr-inner {
@@ -227,8 +181,6 @@ body::before {
   padding:9px 13px; border-radius:0 8px 8px 0;
   font-size:12.5px; color:var(--gold-dark); font-weight:500; margin-bottom:18px;
 }
-
-/* Form fields */
 .fg { margin-bottom:16px; }
 .fg label { display:block; margin-bottom:6px; color:#333; font-weight:600; font-size:13px; }
 .fg input, .fg textarea {
@@ -240,7 +192,7 @@ body::before {
 }
 .fg input:disabled {
   background:#f0ebe0; cursor:not-allowed;
-  -webkit-text-fill-color: #888; color:#888; opacity:1;
+  -webkit-text-fill-color:#888; color:#888; opacity:1;
 }
 .fg input:not(:disabled):focus, .fg textarea:focus {
   outline:none; border-color:var(--gold); box-shadow:0 0 0 3px rgba(200,146,10,.1);
@@ -253,8 +205,6 @@ body::before {
 .pin-status.loading { color:var(--gold-dark); background:var(--gold-bg); border:1px solid var(--gold-border); }
 .pin-status.success { color:var(--green); background:#e8f5ed; }
 .pin-status.error   { color:var(--red);   background:#fdf0ee; }
-
-/* Save Changes button */
 .save-btn {
   width:100%; padding:13px;
   background:linear-gradient(135deg,#48bb78,#1a7a3c);
@@ -264,8 +214,6 @@ body::before {
 }
 .save-btn:hover:not(:disabled) { transform:translateY(-2px); box-shadow:0 7px 22px rgba(26,122,60,.32); }
 .save-btn:disabled { opacity:.55; cursor:not-allowed; }
-
-/* Shimmer */
 @keyframes shimmer {
   0%   { background-position:-600px 0; }
   100% { background-position: 600px 0; }
@@ -281,7 +229,6 @@ body::before {
 }
 .skeleton .fg input:disabled { animation:none; background:#f0ebe0 !important; }
 .hidden { display:none !important; }
-
 @media(max-width:480px){
   .card-header { padding:18px; gap:13px; }
   .cid-banner { padding:9px 18px; }
@@ -298,46 +245,36 @@ body::before {
 <div class="page">
 <div class="card">
 
-  <!-- Header -->
   <div class="card-header">
     <img src="https://raw.githubusercontent.com/cloudhostadmin/KALYAN_CENTURY_2026/main/kal2026.jpeg"
          alt="Kalyan Logo" class="logo" id="rightLogo" loading="eager">
     <div class="header-text">
       <h1>कल्याण शताब्दी वर्ष</h1>
-      <div class="sub">Kalyan 2026 </div>
+      <div class="sub">Kalyan 2026</div>
       <div class="note">Only for Existing Subscriptions Upgrade</div>
     </div>
   </div>
 
-  <!-- Customer ID banner — shown right below header when customerId is in URL -->
   <div class="cid-banner" id="cidBanner">
     <span class="cid-label">Customer ID</span>
     <input type="text" class="cid-pill" id="customerIdDisplay" disabled autocomplete="off" readonly>
   </div>
 
   <div class="card-body">
-
-    <!-- legacy cid-wrap kept for JS compat but hidden via CSS -->
     <div class="cid-wrap" id="cidWrap" style="display:none;"></div>
-
-    <!-- Hidden fields used in payloads -->
     <input type="hidden" id="customerId">
     <input type="hidden" id="paymentLink" value="https://p.ppsl.io/PYTMPS/f4FEqk">
-
     <div id="fetchError"></div>
     <div id="fetchStatus"></div>
 
-    <!-- Already submitted -->
     <div class="done-screen" id="alreadySubmitted">
-      <div class="big">✅</div>
+      <div class="big">&#x2705;</div>
       <h2>Already Submitted</h2>
       <p>This form has already been submitted.<br>Thank you for your response!</p>
     </div>
 
-    <!-- Main content -->
     <div id="mainContent">
 
-      <!-- Feedback -->
       <div class="sec-title">आपका अनुभव बताएं</div>
       <div class="sec-desc">कृपया नीचे दिए विकल्पों में से अपनी स्थिति चुनें</div>
 
@@ -358,32 +295,30 @@ body::before {
           <div class="radio-hi">मई माह का अंक नहीं मिला</div>
         </label>
       </div>
-      <div class="field-error" id="feedbackErr">⚠️ कृपया एक विकल्प चुनें</div>
+      <div class="field-error" id="feedbackErr">&#x26A0;&#xFE0F; कृपया एक विकल्प चुनें</div>
 
-      <!-- Action buttons -->
       <div class="divider">अपना विकल्प चुनें — Choose your action</div>
+
       <div class="action-row">
         <button class="act-btn btn-pay" id="payNowBtn" onclick="handlePayNow()">
-          <span class="icon">💳</span>
+          <span class="icon">&#x1F4B3;</span>
           <span class="ttl">Pay Now</span>
           <span class="dsc">Upgrade Kalyan<br>&#x20B9;200 Renewal</span>
         </button>
         <button class="act-btn btn-addr" id="addrToggleBtn" onclick="toggleAddressForm()">
-          <span class="icon">📮</span>
+          <span class="icon">&#x1F4EE;</span>
           <span class="ttl">Update Address</span>
           <span class="dsc">पता बदलें फिर<br>Pay Now करें</span>
         </button>
       </div>
 
-      <!-- Address saved notice (shows after Save Changes) -->
       <div class="addr-saved" id="addrSaved">
-        ✅ नया पता सहेजा गया — New address saved. Now click Pay Now.
+        &#x2705; नया पता सहेजा गया — New address saved. Now click Pay Now.
       </div>
 
-      <!-- Address form panel -->
       <div class="addr-panel" id="addrPanel">
         <div class="addr-inner">
-          <div class="edit-hint">✏️ Please edit fields if any data is incorrect, then click Save Changes</div>
+          <div class="edit-hint">&#x270F;&#xFE0F; Please edit fields if any data is incorrect, then click Save Changes</div>
           <form id="addrForm" onsubmit="saveAddress(event)">
             <div class="fg">
               <label>First Name <span class="req">*</span></label>
@@ -436,143 +371,148 @@ body::before {
               <input type="tel" id="alternateMobile" pattern="[0-9]{10}" maxlength="10">
             </div>
             <button type="submit" class="save-btn" id="saveBtn">
-              💾 Save Changes
+              &#x1F4BE; Save Changes
             </button>
           </form>
         </div>
       </div>
-      <!-- /addr-panel -->
 
-    </div><!-- /mainContent -->
-  </div><!-- /card-body -->
-</div><!-- /card -->
-</div><!-- /page -->
+    </div>
+  </div>
+</div>
+</div>
 
 <script>
 // ═══════════════════════════════════════════════
 //  CONFIG
 // ═══════════════════════════════════════════════
-// Script 1: Fetch customer data from Customers sheet (GET)
-const APPS_SCRIPT_URL     = 'https://script.google.com/macros/s/AKfycbxsFNHtUwokxokUMOAYXblgSvyKxwJQwxNdUopLQMt-4JxbMJHFr4vATSGxI7mHU56I/exec';
-// Script 2: Save feedback radio selection to Feedback sheet (POST)
-const FEEDBACK_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw8OSOBu_CzJdO9VM0PLBn2Zb7XUOw6MY-GSI8y6wZbC4JqbysoiWI2IUeWp5SgDdp8Pw/exec';
-// Script 3: Save address + payment submission to Submissions sheet (POST)
-const SUBMIT_SCRIPT_URL   = 'https://script.google.com/macros/s/AKfycby-f9vRF58sNIRFIkb6KP2PV7clI2-jSo3NdDy788QIE4XH_yIXfcxnvdwQGo2q6p9N0A/exec';
+var APPS_SCRIPT_URL     = 'https://script.google.com/macros/s/AKfycbxsFNHtUwokxokUMOAYXblgSvyKxwJQwxNdUopLQMt-4JxbMJHFr4vATSGxI7mHU56I/exec';
+var FEEDBACK_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw8OSOBu_CzJdO9VM0PLBn2Zb7XUOw6MY-GSI8y6wZbC4JqbysoiWI2IUeWp5SgDdp8Pw/exec';
+var SUBMIT_SCRIPT_URL   = 'https://script.google.com/macros/s/AKfycby-f9vRF58sNIRFIkb6KP2PV7clI2-jSo3NdDy788QIE4XH_yIXfcxnvdwQGo2q6p9N0A/exec';
 
 // ── State ─────────────────────────────────────
-let selectedFeedback = '';
-let addrOpen         = false;
-let originalData     = {};   // raw data from sheet
-let updatedAddress   = null; // set only after Save Changes — null means use original
+var selectedFeedback    = '';
+var addrOpen            = false;
+var originalData        = {};
+var updatedAddress      = null;
+
+// ── FIX 1: Flag to block pincode API during auto-fill ──
+// When true, the pincode input listener does nothing.
+// Set true before populateFromData runs, false after it finishes.
+var populatingFromSheet = false;
 
 // ── Refs ──────────────────────────────────────
-const cityInput    = document.getElementById('city');
-const stateInput   = document.getElementById('state');
-const pincodeInput = document.getElementById('pincode');
-const pinStatus    = document.getElementById('pincodeStatus');
+var cityInput    = document.getElementById('city');
+var stateInput   = document.getElementById('state');
+var pincodeInput = document.getElementById('pincode');
+var pinStatus    = document.getElementById('pincodeStatus');
 
-// ── URL param ─────────────────────────────────
 function getParam(n) {
-  const v = new URLSearchParams(window.location.search).get(n);
+  var v = new URLSearchParams(window.location.search).get(n);
   if (v) return v;
   if (window.location.hash) {
-    const h = new URLSearchParams(window.location.hash.slice(1)).get(n);
+    var h = new URLSearchParams(window.location.hash.slice(1)).get(n);
     if (h) return h;
   }
   return '';
 }
 
-// ── Set field ─────────────────────────────────
 function setField(id, val) {
   if (val == null || val === '') return;
-  const el = document.getElementById(id);
+  var el = document.getElementById(id);
   if (el) el.value = String(val).trim();
 }
 
-// ── Shimmer ───────────────────────────────────
 function setShimmer(on) {
   document.getElementById('mainContent').classList.toggle('skeleton', on);
-  document.getElementById('fetchStatus').textContent = on ? '⏳ Loading your details…' : '';
+  document.getElementById('fetchStatus').textContent = on ? 'Loading your details...' : '';
 }
 
-// ── Radio pick ────────────────────────────────
 function pickRadio(label) {
-  document.querySelectorAll('.radio-card').forEach(c => c.classList.remove('selected'));
+  document.querySelectorAll('.radio-card').forEach(function(c) { c.classList.remove('selected'); });
   label.classList.add('selected');
-  const inp = label.querySelector('input[type=radio]');
+  var inp = label.querySelector('input[type=radio]');
   if (inp) { inp.checked = true; selectedFeedback = inp.value; }
   document.getElementById('feedbackErr').style.display = 'none';
 }
 
-// ── Toggle address panel ──────────────────────
 function toggleAddressForm() {
   addrOpen = !addrOpen;
   document.getElementById('addrPanel').classList.toggle('open', addrOpen);
   document.getElementById('addrToggleBtn').classList.toggle('open', addrOpen);
-  const dsc = document.getElementById('addrToggleBtn').querySelector('.dsc');
+  var dsc = document.getElementById('addrToggleBtn').querySelector('.dsc');
   dsc.innerHTML = addrOpen ? 'फॉर्म बंद करें<br>Close form' : 'पता बदलें फिर<br>Pay Now करें';
   if (addrOpen) {
-    setTimeout(() => {
+    setTimeout(function() {
       document.getElementById('addrPanel').scrollIntoView({ behavior:'smooth', block:'start' });
     }, 80);
   }
 }
 
-// ── Pincode lookup ────────────────────────────
-async function fetchPincode(pincode, silent = false) {
+// ── Pincode API ───────────────────────────────
+// silent=true  → never shows any UI message (safe for auto-fill fallback)
+// silent=false → shows loading / success / error to user (manual typing)
+async function fetchPincode(pincode, silent) {
   if (!/^\d{6}$/.test(pincode)) return null;
   try {
     if (!silent) {
-      pinStatus.textContent = '🔍 Fetching…';
+      pinStatus.textContent = 'Fetching location...';
       pinStatus.className = 'pin-status loading';
       pinStatus.style.display = 'block';
     }
-    const r = await fetch('https://api.postalpincode.in/pincode/' + pincode);
-    const d = await r.json();
+    var r = await fetch('https://api.postalpincode.in/pincode/' + pincode);
+    var d = await r.json();
     if (d && d[0] && d[0].Status === 'Success' && d[0].PostOffice && d[0].PostOffice.length > 0) {
-      const po = d[0].PostOffice[0];
+      var po = d[0].PostOffice[0];
       if (!silent) {
-        pinStatus.textContent = '✅ Location found!';
+        pinStatus.textContent = 'Location found!';
         pinStatus.className = 'pin-status success';
-        setTimeout(() => { pinStatus.style.display = 'none'; }, 3000);
+        setTimeout(function() { pinStatus.style.display = 'none'; }, 3000);
       }
       return { city: po.District || po.Block || '', state: po.State || '' };
     }
     if (!silent) {
-      pinStatus.textContent = '❌ Invalid — enter manually';
+      pinStatus.textContent = 'Invalid pincode — enter city & state manually';
       pinStatus.className = 'pin-status error';
-      setTimeout(() => { pinStatus.style.display = 'none'; }, 4000);
+      setTimeout(function() { pinStatus.style.display = 'none'; }, 4000);
     }
     return null;
   } catch(err) {
     if (!silent) {
-      pinStatus.textContent = '⚠️ Error — enter manually';
+      pinStatus.textContent = 'Could not fetch — enter city & state manually';
       pinStatus.className = 'pin-status error';
-      setTimeout(() => { pinStatus.style.display = 'none'; }, 4000);
+      setTimeout(function() { pinStatus.style.display = 'none'; }, 4000);
     }
     return null;
   }
 }
 
+// ── FIX 2: Pincode input listener ────────────
+// Only fires when user is manually typing a new pincode.
+// Blocked during auto-fill so it never interferes with sheet data.
 pincodeInput.addEventListener('input', async function(e) {
+  if (populatingFromSheet) return; // blocked during auto-fill
   var p = e.target.value.trim();
   if (p.length < 6) { pinStatus.style.display = 'none'; return; }
   if (p.length === 6) {
-    var loc = await fetchPincode(p);
+    var loc = await fetchPincode(p, false); // show status to user
     if (loc) { cityInput.value = loc.city; stateInput.value = loc.state; }
   }
 });
 
-// ── Char counts ───────────────────────────────
 ['address1','address2','address3'].forEach(function(id, i) {
   var el = document.getElementById(id);
   var sp = document.getElementById(['a1c','a2c','a3c'][i]);
   el.addEventListener('input', function() { sp.textContent = el.value.length; });
 });
 
-// ── Populate form from sheet data ─────────────
+// ── Populate from sheet data ──────────────────
+// FIX 3: city/state always taken from sheet first.
+// Pincode API only called silently when both city AND state are absent from sheet.
 async function populateFromData(data) {
   originalData = data;
+  populatingFromSheet = true; // block pincode listener
+
   setField('firstName',       data.firstName);
   setField('lastName',        data.lastName);
   setField('address1',        data.address1);
@@ -585,25 +525,29 @@ async function populateFromData(data) {
     setField('paymentLink', data.paymentLink || data.PaymentLink);
 
   var pincode = data.pincode ? String(data.pincode).trim() : '';
-  if (pincode) {
-    setField('pincode', pincode);
-    if (data.city && data.state) {
-      setField('city', data.city); setField('state', data.state);
-    } else {
-      var loc = await fetchPincode(pincode, true);
-      if (loc) { cityInput.value = loc.city; stateInput.value = loc.state; }
-    }
-  } else {
-    setField('city', data.city); setField('state', data.state);
+  if (pincode) setField('pincode', pincode);
+
+  var cityVal  = (data.city  || '').trim();
+  var stateVal = (data.state || '').trim();
+
+  if (cityVal || stateVal) {
+    // Sheet has city/state — use directly. No API call.
+    setField('city',  data.city);
+    setField('state', data.state);
+  } else if (pincode) {
+    // Sheet missing both — try API silently as last resort. No error shown.
+    var loc = await fetchPincode(pincode, true);
+    if (loc) { cityInput.value = loc.city; stateInput.value = loc.state; }
   }
 
   ['address1','address2','address3'].forEach(function(id, i) {
     var sp = document.getElementById(['a1c','a2c','a3c'][i]);
     sp.textContent = (document.getElementById(id).value || '').length;
   });
+
+  populatingFromSheet = false; // re-enable pincode listener for manual edits
 }
 
-// ── Validate feedback ─────────────────────────
 function requireFeedback() {
   if (!selectedFeedback) {
     document.getElementById('feedbackErr').style.display = 'block';
@@ -613,12 +557,11 @@ function requireFeedback() {
   return true;
 }
 
-// ── Save Changes (address form) ───────────────
 async function saveAddress(e) {
   e.preventDefault();
   var btn = document.getElementById('saveBtn');
   btn.disabled = true;
-  btn.textContent = 'Saving…';
+  btn.textContent = 'Saving...';
 
   updatedAddress = {
     firstName:       document.getElementById('firstName').value,
@@ -636,49 +579,40 @@ async function saveAddress(e) {
 
   var custId = document.getElementById('customerId').value;
 
-  // ── Script 2: save feedback selection ──
   fetch(FEEDBACK_SCRIPT_URL, {
     method: 'POST', mode: 'no-cors',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      timestamp:  new Date().toISOString(),
-      customerId: custId,
-      feedback:   selectedFeedback,
-      action:     'address_saved'
+      timestamp: new Date().toISOString(), customerId: custId,
+      feedback: selectedFeedback, action: 'address_saved'
     })
   }).catch(function() {});
 
-  // ── Script 3: save address update ──
   fetch(SUBMIT_SCRIPT_URL, {
     method: 'POST', mode: 'no-cors',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(Object.assign({
-      type:           'address_saved',
-      customerId:     custId,
-      feedback:       selectedFeedback,
-      addressChanged: true,
-      paymentLink:    document.getElementById('paymentLink').value,
-      timestamp:      new Date().toISOString()
+      type: 'address_saved', customerId: custId,
+      feedback: selectedFeedback, addressChanged: true,
+      paymentLink: document.getElementById('paymentLink').value,
+      timestamp: new Date().toISOString()
     }, updatedAddress))
   }).catch(function() {});
 
-  // Close panel and show confirmation
   addrOpen = false;
   document.getElementById('addrPanel').classList.remove('open');
   document.getElementById('addrToggleBtn').classList.remove('open');
   document.getElementById('addrToggleBtn').querySelector('.dsc').innerHTML = 'पता बदलें फिर<br>Pay Now करें';
-  document.getElementById('addrToggleBtn').querySelector('.ttl').textContent = '✅ Address Saved';
+  document.getElementById('addrToggleBtn').querySelector('.ttl').textContent = 'Address Saved';
   document.getElementById('addrSaved').classList.add('show');
-
   btn.disabled = false;
-  btn.textContent = '💾 Save Changes';
+  btn.textContent = 'Save Changes';
 
   setTimeout(function() {
     document.getElementById('payNowBtn').scrollIntoView({ behavior:'smooth', block:'center' });
   }, 200);
 }
 
-// ── Pay Now ───────────────────────────────────
 async function handlePayNow() {
   if (!requireFeedback()) return;
 
@@ -692,9 +626,8 @@ async function handlePayNow() {
 
   var payNowBtn = document.getElementById('payNowBtn');
   payNowBtn.disabled = true;
-  payNowBtn.querySelector('.ttl').textContent = 'Processing…';
+  payNowBtn.querySelector('.ttl').textContent = 'Processing...';
 
-  // Use saved address if user clicked Save Changes, else original from sheet
   var addr = updatedAddress || {
     firstName:       originalData.firstName       || '',
     lastName:        originalData.lastName        || '',
@@ -718,19 +651,15 @@ async function handlePayNow() {
     timestamp:      new Date().toISOString()
   }, addr);
 
-  // ── Script 2: save feedback selection ──
   fetch(FEEDBACK_SCRIPT_URL, {
     method: 'POST', mode: 'no-cors',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      timestamp:  new Date().toISOString(),
-      customerId: custId,
-      feedback:   selectedFeedback,
-      action:     'pay_now'
+      timestamp: new Date().toISOString(), customerId: custId,
+      feedback: selectedFeedback, action: 'pay_now'
     })
   }).catch(function() {});
 
-  // ── Script 3: save full form data ──
   fetch(SUBMIT_SCRIPT_URL, {
     method: 'POST', mode: 'no-cors',
     headers: { 'Content-Type': 'application/json' },
@@ -741,9 +670,6 @@ async function handlePayNow() {
   window.location.href = payLink;
 }
 
-// ═══════════════════════════════════════════════
-//  INIT
-// ═══════════════════════════════════════════════
 async function initForm() {
   var customerId   = getParam('customerId');
   var paymentLink  = getParam('paymentLink');
@@ -759,15 +685,12 @@ async function initForm() {
   }
 
   if (!customerId) return;
-
   var id = decodeURIComponent(customerId);
 
-  // Populate hidden payload field and visible banner display
   document.getElementById('customerId').value        = id;
   document.getElementById('customerIdDisplay').value = id;
   document.getElementById('cidBanner').classList.add('visible');
 
-  // Already submitted?
   var key = 'form_submitted_' + id;
   if (localStorage.getItem(key) === 'true') {
     document.getElementById('mainContent').style.display      = 'none';
@@ -775,7 +698,6 @@ async function initForm() {
     return;
   }
 
-  // Show shimmer while fetching from sheet
   setShimmer(true);
   try {
     var res    = await fetch(APPS_SCRIPT_URL + '?action=getCustomer&customerId=' + encodeURIComponent(id));
@@ -783,15 +705,15 @@ async function initForm() {
     if (result.success && result.data) {
       await populateFromData(result.data);
     } else {
-      var err = document.getElementById('fetchError');
-      err.textContent = '⚠️ Customer ID "' + id + '" not found. Please fill in manually.';
-      err.classList.add('active');
+      var errEl = document.getElementById('fetchError');
+      errEl.textContent = 'Customer ID "' + id + '" not found. Please fill in your details manually.';
+      errEl.classList.add('active');
     }
   } catch(e) {
     console.error(e);
-    var err = document.getElementById('fetchError');
-    err.textContent = '⚠️ Could not load your details. Please fill in manually.';
-    err.classList.add('active');
+    var errEl = document.getElementById('fetchError');
+    errEl.textContent = 'Could not load your details. Please fill in manually.';
+    errEl.classList.add('active');
   } finally {
     setShimmer(false);
   }
