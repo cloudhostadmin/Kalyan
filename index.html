@@ -257,6 +257,45 @@ body::before {
 }
 .save-btn:hover:not(:disabled) { transform:translateY(-2px); box-shadow:0 7px 22px rgba(26,122,60,.32); }
 .save-btn:disabled { opacity:.55; cursor:not-allowed; }
+
+/* ── Anubhav (Feedback) Section — placed at end ── */
+.anubhav-section {
+  margin-top: 26px;
+  border-top: 1.5px solid var(--gold-border);
+  padding-top: 22px;
+}
+.anubhav-submit-btn {
+  margin-top: 14px;
+  padding: 9px 22px;
+  background: linear-gradient(135deg, #c8920a, #7a5500);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .25s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.anubhav-submit-btn:hover { transform: translateY(-1px); box-shadow: 0 5px 16px rgba(200,146,10,.32); }
+.anubhav-submit-btn:active { transform: translateY(0); }
+.anubhav-submit-btn:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+.anubhav-submitted {
+  display: none;
+  margin-top: 12px;
+  background: #e8f5ed;
+  border: 1.5px solid #48bb78;
+  color: #1a7a3c;
+  padding: 9px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+}
+.anubhav-submitted.show { display: block; }
+
 /* Shimmer */
 @keyframes shimmer {
   0%   { background-position:-600px 0; }
@@ -311,47 +350,26 @@ body::before {
     <input type="hidden" id="paymentLink" value="https://p.ppsl.io/PYTMPS/f4FEqk">
     <div id="fetchError"></div>
     <div id="fetchStatus"></div>
-
     <!-- ══ NEW INFORMATIONAL NOTICE ══ -->
     <div class="info-notice">
       कल्याण अंक आपके वर्तमान सदस्यता के अनुसार हर माह सामान्य डाक से प्रेषित किया जाता है। कुछ सदस्यों को सामान्य डाक से भेजी पत्रिका समय पर प्राप्त नहीं हो रही है। इसी को ध्यान में रखते हुए, सामान्य डाक वाले सदस्य अतिरिक्त ₹200 जमा करके अपनी कल्याण सदस्यता को रेजिस्टर्ड ट्रैकिंग सुविधा डाक के माध्यम से प्राप्त करने की सुविधा ले सकते हैं। कृपया नीचे दिए गए लिंक द्वारा आप ₹200 भुगतान कर हर माह बिना विलंब के कल्याण प्राप्त कर सकते हैं।
     </div>
-
     <!-- Main content -->
     <div id="mainContent">
-      <!-- Feedback -->
-      <div class="sec-title">आपका अनुभव बताएं</div>
-      <div class="sec-desc">कृपया नीचे दिए विकल्पों में से अपनी स्थिति चुनें</div>
-      <div class="radio-group" id="feedbackGroup">
-        <label class="radio-card" onclick="pickRadio(this)">
-          <input type="radio" name="feedback" value="2026 के ज्यादातर अंक प्राप्त नहीं हो सका">
-          <div class="radio-dot"></div>
-          <div class="radio-hi">2026 के ज्यादातर अंक प्राप्त नहीं हो सका</div>
-        </label>
-        <label class="radio-card" onclick="pickRadio(this)">
-          <input type="radio" name="feedback" value="1 और 2 अंक ही मिले">
-          <div class="radio-dot"></div>
-          <div class="radio-hi">1 और 2 अंक ही मिले</div>
-        </label>
-        <label class="radio-card" onclick="pickRadio(this)">
-          <input type="radio" name="feedback" value="मई माह का अंक नहीं मिला">
-          <div class="radio-dot"></div>
-          <div class="radio-hi">मई माह का अंक नहीं मिला</div>
-        </label>
-      </div>
-      <div class="field-error" id="feedbackErr">⚠️ कृपया एक विकल्प चुनें</div>
       <!-- Action buttons -->
       <div class="divider">अपना विकल्प चुनें — Choose your action</div>
       <div class="action-row">
+        <!-- CHANGE 2: Pay Now button — two lines only -->
         <button class="act-btn btn-pay" id="payNowBtn" onclick="handlePayNow()">
           <span class="icon">💳</span>
-          <span class="ttl">Pay Now</span>
-          <span class="dsc">Upgrade Kalyan<br>&#x20B9;200 Renewal</span>
+          <span class="ttl">Pay Rs 200 Now</span>
+          <span class="dsc">Upgrade Kalyan Delivery<br>via Registered Post</span>
         </button>
+        <!-- CHANGE 3: Update Address button — removed "फिर" and line 3 -->
         <button class="act-btn btn-addr" id="addrToggleBtn" onclick="toggleAddressForm()">
           <span class="icon">📮</span>
           <span class="ttl">Update Address</span>
-          <span class="dsc">पता बदलें फिर<br>Pay Now करें</span>
+          <span class="dsc">पता बदलें</span>
         </button>
       </div>
       <!-- Address saved notice (shows after Save Changes) -->
@@ -420,6 +438,38 @@ body::before {
         </div>
       </div>
       <!-- /addr-panel -->
+
+      <!-- CHANGE 1: Anubhav section moved to end, after Update Address panel -->
+      <div class="anubhav-section">
+        <div class="sec-title">आपका अनुभव बताएं</div>
+        <div class="sec-desc">कृपया नीचे दिए विकल्पों में से अपनी स्थिति चुनें</div>
+        <div class="radio-group" id="feedbackGroup">
+          <label class="radio-card" onclick="pickRadio(this)">
+            <input type="radio" name="feedback" value="2026 के ज्यादातर अंक प्राप्त नहीं हो सका">
+            <div class="radio-dot"></div>
+            <div class="radio-hi">2026 के ज्यादातर अंक प्राप्त नहीं हो सका</div>
+          </label>
+          <label class="radio-card" onclick="pickRadio(this)">
+            <input type="radio" name="feedback" value="1 और 2 अंक ही मिले">
+            <div class="radio-dot"></div>
+            <div class="radio-hi">1 और 2 अंक ही मिले</div>
+          </label>
+          <label class="radio-card" onclick="pickRadio(this)">
+            <input type="radio" name="feedback" value="मई माह का अंक नहीं मिला">
+            <div class="radio-dot"></div>
+            <div class="radio-hi">मई माह का अंक नहीं मिला</div>
+          </label>
+        </div>
+        <div class="field-error" id="feedbackErr">⚠️ कृपया एक विकल्प चुनें</div>
+        <button class="anubhav-submit-btn" id="anubhavSubmitBtn" onclick="submitAnubhav()">
+          ✉️ अनुभव भेजें
+        </button>
+        <div class="anubhav-submitted" id="anubhavSubmitted">
+          ✅ आपका अनुभव सफलतापूर्वक भेजा गया — Thank you for your feedback!
+        </div>
+      </div>
+      <!-- /anubhav-section -->
+
     </div><!-- /mainContent -->
   </div><!-- /card-body -->
 </div><!-- /card -->
@@ -473,13 +523,37 @@ function pickRadio(label) {
   if (inp) { inp.checked = true; selectedFeedback = inp.value; }
   document.getElementById('feedbackErr').style.display = 'none';
 }
+// ── Submit Anubhav (standalone feedback button) ───────────────────────────
+function submitAnubhav() {
+  if (!selectedFeedback) {
+    document.getElementById('feedbackErr').style.display = 'block';
+    document.getElementById('feedbackGroup').scrollIntoView({ behavior:'smooth', block:'center' });
+    return;
+  }
+  var btn = document.getElementById('anubhavSubmitBtn');
+  btn.disabled = true;
+  btn.textContent = 'भेज रहे हैं…';
+  var custId = document.getElementById('customerId').value;
+  fetch(FEEDBACK_SCRIPT_URL, {
+    method: 'POST', mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      timestamp:  new Date().toISOString(),
+      customerId: custId,
+      feedback:   selectedFeedback,
+      action:     'anubhav_submit'
+    })
+  }).catch(function() {});
+  document.getElementById('anubhavSubmitted').classList.add('show');
+  btn.style.display = 'none';
+}
 // ── Toggle address panel ──────────────────────
 function toggleAddressForm() {
   addrOpen = !addrOpen;
   document.getElementById('addrPanel').classList.toggle('open', addrOpen);
   document.getElementById('addrToggleBtn').classList.toggle('open', addrOpen);
   const dsc = document.getElementById('addrToggleBtn').querySelector('.dsc');
-  dsc.innerHTML = addrOpen ? 'फॉर्म बंद करें<br>Close form' : 'पता बदलें फिर<br>Pay Now करें';
+  dsc.innerHTML = addrOpen ? 'फॉर्म बंद करें' : 'पता बदलें';
   if (addrOpen) {
     setTimeout(() => {
       document.getElementById('addrPanel').scrollIntoView({ behavior:'smooth', block:'start' });
@@ -768,14 +842,6 @@ const PIN_ENDPOINTS = [
 })();
 })();
 // ── End pincode fetch ─────────────────────────────────────────────────────
-//pincodeInput.addEventListener('input', async function(e) {
-//   var p = e.target.value.trim();
-//   if (p.length < 6) { pinStatus.style.display = 'none'; return; }
-//   if (p.length === 6) {
-//     var loc = await fetchPincode(p);
-//     if (loc) { cityInput.value = loc.city; stateInput.value = loc.state; }
-// }
-//});
 // ── Char counts ───────────────────────────────
 ['address1','address2','address3'].forEach(function(id, i) {
   var el = document.getElementById(id);
@@ -869,7 +935,7 @@ async function saveAddress(e) {
   addrOpen = false;
   document.getElementById('addrPanel').classList.remove('open');
   document.getElementById('addrToggleBtn').classList.remove('open');
-  document.getElementById('addrToggleBtn').querySelector('.dsc').innerHTML = 'पता बदलें फिर<br>Pay Now करें';
+  document.getElementById('addrToggleBtn').querySelector('.dsc').innerHTML = 'पता बदलें';
   document.getElementById('addrToggleBtn').querySelector('.ttl').textContent = '✅ Address Saved';
   document.getElementById('addrSaved').classList.add('show');
   btn.disabled = false;
@@ -880,7 +946,6 @@ async function saveAddress(e) {
 }
 // ── Pay Now ───────────────────────────────────
 async function handlePayNow() {
-  if (!requireFeedback()) return;
   var custId  = document.getElementById('customerId').value;
   var payLink = document.getElementById('paymentLink').value;
   var payNowBtn = document.getElementById('payNowBtn');
