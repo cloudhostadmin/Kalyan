@@ -135,11 +135,6 @@ body::before {
   margin-bottom:18px; font-size:13px; font-weight:500;
 }
 #fetchError.active { display:block; }
-/* Already submitted */
-.done-screen { display:none; text-align:center; padding:36px 20px; }
-.done-screen .big { font-size:50px; margin-bottom:14px; }
-.done-screen h2 { font-family:'DM Serif Display',serif; font-size:22px; color:var(--green); margin-bottom:10px; }
-.done-screen p  { color:var(--muted); font-size:14px; line-height:1.6; }
 /* Section heading */
 .sec-title { font-family:'DM Serif Display',serif; font-size:18px; color:var(--text); margin-bottom:4px; }
 .sec-desc  { font-size:13px; color:var(--muted); margin-bottom:16px; line-height:1.5; }
@@ -322,12 +317,6 @@ body::before {
       कल्याण अंक आपके वर्तमान सदस्यता के अनुसार हर माह सामान्य डाक से प्रेषित किया जाता है। कुछ सदस्यों को सामान्य डाक से भेजी पत्रिका समय पर प्राप्त नहीं हो रही है। इसी को ध्यान में रखते हुए, सामान्य डाक वाले सदस्य अतिरिक्त ₹200 जमा करके अपनी कल्याण सदस्यता को रेजिस्टर्ड ट्रैकिंग सुविधा डाक के माध्यम से प्राप्त करने की सुविधा ले सकते हैं। कृपया नीचे दिए गए लिंक द्वारा आप ₹200 भुगतान कर हर माह बिना विलंब के कल्याण प्राप्त कर सकते हैं।
     </div>
 
-    <!-- Already submitted -->
-    <div class="done-screen" id="alreadySubmitted">
-      <div class="big">✅</div>
-      <h2>Already Submitted</h2>
-      <p>This form has already been submitted.<br>Thank you for your response!</p>
-    </div>
     <!-- Main content -->
     <div id="mainContent">
       <!-- Feedback -->
@@ -894,10 +883,6 @@ async function handlePayNow() {
   if (!requireFeedback()) return;
   var custId  = document.getElementById('customerId').value;
   var payLink = document.getElementById('paymentLink').value;
-  var key     = 'form_submitted_' + custId;
-  if (localStorage.getItem(key) === 'true') {
-    window.location.href = payLink; return;
-  }
   var payNowBtn = document.getElementById('payNowBtn');
   payNowBtn.disabled = true;
   payNowBtn.querySelector('.ttl').textContent = 'Processing…';
@@ -940,7 +925,6 @@ async function handlePayNow() {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload)
   }).catch(function() {});
-  localStorage.setItem(key, 'true');
   window.location.href = payLink;
 }
 // ═══════════════════════════════════════════════
@@ -964,13 +948,6 @@ async function initForm() {
   document.getElementById('customerId').value        = id;
   document.getElementById('customerIdDisplay').value = id;
   document.getElementById('cidBanner').classList.add('visible');
-  // Already submitted?
-  var key = 'form_submitted_' + id;
-  if (localStorage.getItem(key) === 'true') {
-    document.getElementById('mainContent').style.display      = 'none';
-    document.getElementById('alreadySubmitted').style.display = 'block';
-    return;
-  }
   // Show shimmer while fetching from sheet
   setShimmer(true);
   try {
