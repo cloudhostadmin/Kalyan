@@ -518,50 +518,413 @@ function toggleAddressForm() {
   }
 }
 
-// ── Pincode lookup ────────────────────────────
-async function fetchPincode(pincode, silent = false) {
-  if (!/^\d{6}$/.test(pincode)) return null;
-  try {
-    if (!silent) {
-      pinStatus.textContent = '🔍 Fetching…';
-      pinStatus.className = 'pin-status loading';
-      pinStatus.style.display = 'block';
+// ── Pincode fetch: race-safe, timeout-aware, with retry ──────────────────
+// ── Two endpoints: direct API first, CORS proxy as fallback ──────────────
+const PIN_ENDPOINTS = [
+  'https://api.postalpincode.in/pincode/',
+  'https://corsproxy.io/?https://api.postalpincode.in/pincode/'
+];
+
+// ── Robust Pincode Autofill ─────────────────────────────────────────────
+
+(function initPincodeAutofill() {
+
+  const statusEl = document.getElementById('pincodeStatus');
+
+  let lastFetchedPin = '';
+  let activeController = null;
+
+  const TIERS = [
+     'https://api.zippopotam.us/in/'
+  ];
+
+  function setStatus(message, type = '') {
+
+    statusEl.textContent = message;
+
+    statusEl.className = 'pin-status';
+
+    if (type) {
+      statusEl.classList.add(type);
     }
-    const r = await fetch('https://api.postalpincode.in/pincode/' + pincode);
-    const d = await r.json();
-    if (d && d[0] && d[0].Status === 'Success' && d[0].PostOffice && d[0].PostOffice.length > 0) {
-      const po = d[0].PostOffice[0];
-      if (!silent) {
-        pinStatus.textContent = '✅ Location found!';
-        pinStatus.className = 'pin-status success';
-        setTimeout(() => { pinStatus.style.display = 'none'; }, 3000);
+
+    statusEl.style.display = message ? 'block' : 'none';
+  }
+
+  function clearFields() {
+    cityInput.value = '';
+    stateInput.value = '';
+  }
+
+  async function timedFetch(url, signal, timeout = 8000) {
+
+    const timeoutCtrl = new AbortController();
+
+    const timer = setTimeout(() => {
+      timeoutCtrl.abort();
+    }, timeout);
+
+    try {
+
+      const combinedSignal = AbortSignal.any([
+        signal,
+        timeoutCtrl.signal
+      ]);
+
+      const res = await fetch(url, {
+        method: 'GET',
+        cache: 'no-cache',
+        signal: combinedSignal
+      });
+
+      if (!res.ok) {
+        throw new Error('HTTP ' + res.status);
       }
-      return { city: po.District || po.Block || '', state: po.State || '' };
+
+      return await res.json();
+
+    } finally {
+      clearTimeout(timer);
     }
-    if (!silent) {
-      pinStatus.textContent = '❌ Invalid — enter manually';
-      pinStatus.className = 'pin-status error';
-      setTimeout(() => { pinStatus.style.display = 'none'; }, 4000);
-    }
-    return null;
-  } catch(err) {
-    if (!silent) {
-      pinStatus.textContent = '⚠️ Error — enter manually';
-      pinStatus.className = 'pin-status error';
-      setTimeout(() => { pinStatus.style.display = 'none'; }, 4000);
-    }
+  }
+
+  function parseResponse(data) {
+
+  if (
+    !data ||
+    !data.places ||
+    !data.places.length
+  ) {
     return null;
   }
+
+  const place = data.places[0];
+
+  return {
+    city: (place['place name'] || '').trim(),
+    state: (place['state'] || '').trim()
+  };
 }
 
-pincodeInput.addEventListener('input', async function(e) {
-  var p = e.target.value.trim();
-  if (p.length < 6) { pinStatus.style.display = 'none'; return; }
-  if (p.length === 6) {
-    var loc = await fetchPincode(p);
-    if (loc) { cityInput.value = loc.city; stateInput.value = loc.state; }
+  
+// ── Robust Pincode Autofill ─────────────────────────────────────────────
+
+(function initPincodeAutofill() {
+
+  const statusEl = document.getElementById("pincodeStatus");
+
+  let lastFetchedPin = "";
+  let activeController = null;
+
+  function setStatus(message, type = "") {
+
+    statusEl.textContent = message;
+
+    statusEl.className = "pin-status" + (type ? " " + type : "");
+
+    statusEl.style.display = message ? "block" : "none";
   }
-});
+
+  function clearDependentFields() {
+    cityInput.value = "";
+    stateInput.value = "";
+    lastFetchedPin = "";
+  }
+
+  function anySignal(signals) {
+
+    if (typeof AbortSignal.any === "function") {
+      return AbortSignal.any(signals);
+    }
+
+    const ctrl = new AbortController();
+
+    for (const s of signals) {
+
+      if (s.aborted) {
+        ctrl.abort();
+        break;
+      }
+
+      s.addEventListener(
+        "abort",
+        () => ctrl.abort(),
+        { once: true }
+      );
+    }
+
+    return ctrl.signal;
+  }
+
+  async function timedFetch(url, parentSignal, ms = 8000) {
+
+    const timer = new AbortController();
+
+    const id = setTimeout(() => {
+      timer.abort();
+    }, ms);
+
+    try {
+
+      const res = await fetch(url, {
+        method: "GET",
+        headers: {
+          Accept: "application/json"
+        },
+        cache: "no-cache",
+        signal: anySignal([
+          parentSignal,
+          timer.signal
+        ]),
+      });
+
+      if (!res.ok) {
+        throw new Error(`HTTP ${res.status}`);
+      }
+
+      return await res.json();
+
+    } finally {
+      clearTimeout(id);
+    }
+  }
+
+  function parsePostalPincodeResponse(data) {
+
+    if (
+      !Array.isArray(data) ||
+      !data[0]
+    ) {
+      throw new Error("Bad API response");
+    }
+
+    const r = data[0];
+
+    if (
+      r.Status !== "Success" ||
+      !Array.isArray(r.PostOffice) ||
+      !r.PostOffice.length
+    ) {
+      throw new Error("Invalid PIN");
+    }
+
+    const po = r.PostOffice[0];
+
+    const city = (
+      po.District ||
+      po.Division ||
+      po.Block ||
+      ""
+    ).trim();
+
+    const state = (
+      po.State ||
+      ""
+    ).trim();
+
+    if (!city || !state) {
+      throw new Error("Incomplete data");
+    }
+
+    return { city, state };
+  }
+
+  async function tryPostalPincodeDirect(pin, signal) {
+
+    const data = await timedFetch(
+      `https://api.postalpincode.in/pincode/${pin}`,
+      signal
+    );
+
+    return parsePostalPincodeResponse(data);
+  }
+
+  async function tryPostalPincodeViaProxy(pin, signal) {
+
+    const proxyUrl =
+      `https://corsproxy.io/?${encodeURIComponent(
+        `https://api.postalpincode.in/pincode/${pin}`
+      )}`;
+
+    const data = await timedFetch(
+      proxyUrl,
+      signal
+    );
+
+    return parsePostalPincodeResponse(data);
+  }
+
+  async function tryNominatim(pin, signal) {
+
+    const data = await timedFetch(
+      `https://nominatim.openstreetmap.org/search?postalcode=${pin}&country=India&format=json&addressdetails=1&limit=1`,
+      signal
+    );
+
+    if (
+      !Array.isArray(data) ||
+      !data.length
+    ) {
+      throw new Error("No results");
+    }
+
+    const addr = data[0]?.address || {};
+
+    const city = (
+      addr.city ||
+      addr.county ||
+      addr.state_district ||
+      addr.town ||
+      addr.village ||
+      ""
+    ).trim();
+
+    const state = (
+      addr.state ||
+      ""
+    ).trim();
+
+    if (!city || !state) {
+      throw new Error("Incomplete data");
+    }
+
+    return { city, state };
+  }
+
+  const TIERS = [
+    tryPostalPincodeDirect,
+    tryPostalPincodeViaProxy,
+    tryNominatim
+  ];
+
+  async function fetchPinData(pin) {
+
+    if (activeController) {
+      activeController.abort();
+    }
+
+    activeController = new AbortController();
+
+    const { signal } = activeController;
+
+    setStatus("🔍 Fetching…", "loading");
+
+    let lastErr = null;
+
+    try {
+
+      for (const fn of TIERS) {
+
+        if (signal.aborted) return;
+
+        try {
+
+          const { city, state } =
+            await fn(pin, signal);
+
+          cityInput.value = city;
+          stateInput.value = state;
+
+          lastFetchedPin = pin;
+
+          setStatus(
+            `✅ ${city}, ${state}`,
+            "success"
+          );
+
+          setTimeout(() => {
+            statusEl.style.display = "none";
+          }, 3000);
+
+          return;
+
+        } catch (err) {
+
+          if (err.name === "AbortError") {
+            return;
+          }
+
+          console.warn(err);
+
+          lastErr = err;
+        }
+      }
+
+      clearDependentFields();
+
+      setStatus(
+        "⚠️ Enter manually",
+        "error"
+      );
+
+      console.error(lastErr);
+
+    } finally {
+
+      activeController = null;
+    }
+  }
+
+  function handlePincodeInput(e) {
+
+    const raw = e.target.value
+      .replace(/\D/g, "")
+      .slice(0, 6);
+
+    if (e.target.value !== raw) {
+      e.target.value = raw;
+    }
+
+    if (raw.length < 6) {
+
+      if (activeController) {
+        activeController.abort();
+      }
+
+      clearDependentFields();
+
+      setStatus("");
+
+      return;
+    }
+
+    if (raw === lastFetchedPin) {
+      return;
+    }
+
+    fetchPinData(raw);
+  }
+
+  pincodeInput.addEventListener(
+    "input",
+    handlePincodeInput
+  );
+
+  pincodeInput.addEventListener("paste", () => {
+
+    setTimeout(() => {
+
+      handlePincodeInput({
+        target: pincodeInput
+      });
+
+    }, 0);
+  });
+
+})();
+
+})();
+// ── End pincode fetch ─────────────────────────────────────────────────────
+
+//pincodeInput.addEventListener('input', async function(e) {
+//   var p = e.target.value.trim();
+//   if (p.length < 6) { pinStatus.style.display = 'none'; return; }
+//   if (p.length === 6) {
+//     var loc = await fetchPincode(p);
+//     if (loc) { cityInput.value = loc.city; stateInput.value = loc.state; }
+// }
+//});
+
 
 // ── Char counts ───────────────────────────────
 ['address1','address2','address3'].forEach(function(id, i) {
